@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="kalooki">
+<html lang="en" ng-app="kalookiApp">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -9,8 +9,10 @@
     <title>Kalooki Online</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="app.css">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular.min.js" crossorigin="anonymous"></script>
-    <script src="media/js/app.js"></script>
+    <script src="app.module.js"></script>
+    <script src="card-table/card-table.module.js"></script>
   </head>
 
   <body ng-controller="KalookiController">
@@ -22,18 +24,15 @@
       <a class="navbar-brand" href="#">Kalooki</a>
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-          </li>
         </ul>
+        <form class="form-inline mt-2 mt-md-0">
+            <input class="form-control mr-sm-2" type="text" placeholder="Player Name" ng-model="playername">
+        </form>
       </div>
     </nav>
 
     <div class="container">
-      <div class="jumbotron">
-        <h1>{{pagetitle}}</h1>
-        <p>{{introtext}}</p>
-      </div>
+      <card-table></card-table>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
