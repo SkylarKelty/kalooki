@@ -1,5 +1,7 @@
-<p class="infotext">{{$ctrl.infotext}}</p>
+<div class="container-fluid">
+    <p class="infotext">{{$ctrl.infotext}}</p>
 
-<ul ui-sortable="sortableOptions" ng-model="$ctrl.hand" class="row cardhand">
-    <li ng-repeat="item in $ctrl.hand" class="cardslot col"><img ng-src="{{item.src}}" alt="{{item.suit}} {{item.card}}" class="card" /></li>
-</ul>
+    <ul ui-sortable="sortableOptions" ng-model="$ctrl.hand" class="row cardhand">
+        <li ng-repeat="item in $ctrl.hand" class="cardslot col"><img ng-src="{{item.src}}" alt="{{item.suit}} {{item.card}}" class="card" /></li>
+    </ul>
+</div>
