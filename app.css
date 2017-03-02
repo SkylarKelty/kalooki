@@ -2,6 +2,11 @@ body {
     background-color: #00dd77;
 }
 
+.infotext {
+    text-align: center;
+    margin-top: -20px;
+}
+
 .cardslot {
     border: 1px solid #CCC;
     border-radius: 5px;

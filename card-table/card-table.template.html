@@ -1,6 +1,5 @@
-<h1>{{$ctrl.pagetitle}}</h1>
-<p>{{$ctrl.introtext}}</p>
+<p class="infotext">{{$ctrl.infotext}}</p>
 
 <ul ui-sortable="sortableOptions" ng-model="$ctrl.hand" class="row cardhand">
-    <li ng-repeat="item in $ctrl.hand" class="cardslot col"><img ng-src="{{item.src}}" alt="{{item.name}} {{item.type}}" class="card" /></li>
+    <li ng-repeat="item in $ctrl.hand" class="cardslot col"><img ng-src="{{item.src}}" alt="{{item.suit}} {{item.card}}" class="card" /></li>
 </ul>

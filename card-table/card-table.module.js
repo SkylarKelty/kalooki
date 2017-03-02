@@ -1,23 +1,28 @@
 // Register `CardTable` component, along with its associated controller and template
 angular.module('kalookiApp').component('cardTable', {
     templateUrl: 'card-table/card-table.template.html',
-    controller: function CardTableController($scope) {
-        this.pagetitle = 'Kalooki';
-        this.introtext = 'Welcome to Kalooki Online';
-        this.activecard = 'media/images/cards/2c.png'
-        this.hand = kalooki.buildExampleCardArray(14);
+    controller: function CardTableController($http) {
+        var self = this;
 
-        this.sortingLog = [];
+        self.infotext = 'Welcome to Kalooki Online';
 
-        this.sortableOptions = {
+        // Build my hand.
+        self.hand = [];
+        $http.get('api/index.php').then(function(response) {
+            self.hand = response.data;
+        });
+
+        // Sorting.
+        self.sortingLog = [];
+        self.sortableOptions = {
             'ui-floating': true,
             axis: 'x',
             stop: function(e, ui) {
                 var logEntry = {
-                    ID: this.sortingLog.length + 1,
+                    ID: self.sortingLog.length + 1,
                     Text: 'Moved element: ' + ui.item.scope().item.src
                 };
-                this.sortingLog.push(logEntry);
+                self.sortingLog.push(logEntry);
             }
         };
     }
