@@ -43,6 +43,20 @@ foreach ($suits as $suit) {
 }
 
 $deck = array_merge($pack, $pack);
+
+// Add in the two jokers.
+$deck[] = [
+    'src' => "media/images/cards/joker1.png",
+    'suit' => 'joker',
+    'card' => 'joker'
+];
+$deck[] = [
+    'src' => "media/images/cards/joker2.png",
+    'suit' => 'joker',
+    'card' => 'joker'
+];
+
+// Shuffle the deck!
 shuffle($deck);
 shuffle($deck);
 shuffle($deck);
