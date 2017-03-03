@@ -1,0 +1,16 @@
+{
+  "name": "kalooki-api",
+  "version": "1.0.0",
+  "description": "Kalooki online",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Skylar Kelty",
+  "license": "GPL-2.0",
+  "repository": "https://github.com/SkylarKelty/kalooki.git",
+  "dependencies": {
+    "express": "^4.15.0",
+    "shuffle-array": "^1.0.1"
+  }
+}
