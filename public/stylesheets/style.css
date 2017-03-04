@@ -1,5 +1,18 @@
 body {
-    background-color: #00dd77;
+    background:
+        radial-gradient(black 15%, transparent 16%) 0 0,
+        radial-gradient(black 15%, transparent 16%) 4px 4px,
+        radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 0 1px,
+        radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 4px 5px;
+
+    background-size:8px 8px;
+    background-color: #003B1C;
+    color: #FFF;
+}
+
+.bg-inverse {
+    background-color: rgba(0, 0, 0, 0.3) !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.7);
 }
 
 .infotext {
@@ -27,8 +40,12 @@ body {
 	padding: 5px 20px;
     flex-wrap: nowrap;
     justify-content: space-around;
-    border-top: 1px solid #19FF95;
-    background: #00904E;
+    background: rgba(255, 255, 255, 0.1);
+    border-top: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.deck img {
+    cursor: pointer;
 }
 
 .cardslot {

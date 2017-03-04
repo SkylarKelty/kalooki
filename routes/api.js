@@ -11,8 +11,8 @@ var gameSchema = new Schema({
   owner: Number,
   players: [{ id: Number, name: String }],
   deck: [{ _id: String, pack: Number, src: String, suit: String, card: String }],
-  discard: [{ _id: String, src: String, suit: String, card: String }],
-  table: [{ _id: String, group: Number, src: String, suit: String, card: String }],
+  discard: [{ _id: String, pack: Number, src: String, suit: String, card: String }],
+  table: [{ _id: String, playerid: String, group: Number, src: String, suit: String, card: String }],
   hands: [{ _id: Number, cards: [{_id: String, pack: Number, src: String, suit: String, card: String}] }],
 });
 var Game = mongoose.model('Game', gameSchema);
@@ -110,11 +110,18 @@ router.get('/card', function(req, res, next) {
             res.status(404).end();
         }
 
+        // Are we at the end of our game?
+        if (doc.deck.length == 0) {
+            // Switch discard piles and hand.
+        }
+
         // Grab a card from the deck.
         var card = doc.deck.pop();
-        console.log(doc.deck.length);
 
+        // Add it to this player's hand.
         doc.hands.id(playerid).cards.push(card);
+
+        // Save the game state.
         doc.save(function (err) {
             if (err) {
                 console.log(err);

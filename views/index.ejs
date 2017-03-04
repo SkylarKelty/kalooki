@@ -19,7 +19,7 @@
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <a class="navbar-brand" href="#"><%= title %></a>
+      <a class="navbar-brand" href="#">{{infotext}}</a>
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
         </ul>
@@ -30,8 +30,6 @@
     </nav>
 
     <div class="container-fluid">
-        <p class="infotext">{{infotext}}</p>
-
         <div class="row justify-content-md-center">
             <div class="deck col col-lg-1 cardslot">
                 <img ng-src="{{decksrc}}" alt="Deck" class="cardimg" ng-click="pickDeck()" />

@@ -63,7 +63,7 @@ kalooki.controller('KalookiController', function KalookiController($scope, $http
             $scope.discardsrc = card.src;
             $scope.gamemode = false;
 
-            $scope.infotext += ' It\'s your turn!'; // I mean.. it wouldnt be.. but for testing.
+            $scope.infotext = ' It\'s your turn!'; // I mean.. it wouldnt be.. but for testing.
             $scope.gamemode = 'turn';
         });
     };
