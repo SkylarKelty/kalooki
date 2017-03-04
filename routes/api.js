@@ -64,6 +64,11 @@ router.get('/game_start', function(req, res, next) {
         hand.push(deck[i]);
     }
 
+    // TODO: choose random player.
+    var startingPlayerID = 1;
+    // Choose a player and deal the 14th card.
+    hand.push(deck[i++]);
+
     // Save the game to MongoDB.
     var userID = 1;//req.param('userid'); // TODO - player system.
     var gameID = Math.floor((Math.random() * 1000000) + 1); // TODO: collision check.
@@ -87,6 +92,7 @@ router.get('/game_start', function(req, res, next) {
 
     res.json({
         gameid: gameID,
+        startingplayer: startingPlayerID,
         hand: hand
     })
 });

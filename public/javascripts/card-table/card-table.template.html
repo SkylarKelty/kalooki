@@ -10,7 +10,7 @@
         </div>
     </div>
 
-    <ul ui-sortable="sortableOptions" ng-model="$ctrl.hand" class="row justify-content-md-center cardhand">
+    <ul ui-sortable="sortableOptions" ui-sortable-on-change="$ctrl.updateHandOrder" ng-model="$ctrl.hand" class="row justify-content-md-center cardhand">
         <li ng-repeat="item in $ctrl.hand" class="cardslot col"><img ng-src="{{item.src}}" alt="{{item.suit}} {{item.card}}" class="cardimg" /></li>
     </ul>
 </div>
