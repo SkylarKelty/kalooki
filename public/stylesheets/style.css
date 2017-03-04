@@ -31,8 +31,7 @@ body {
     background: #00904E;
 }
 
-.cardhand .cardslot {
-    display: inline-flex;
+.cardslot {
 	padding: 5px;
 	border: 0;
 	font-size: 1.1em;
@@ -42,7 +41,7 @@ body {
     min-width: 0;
 }
 
-.cardhand .cardslot img {
+.cardimg {
     width: 100%;
     max-width: 135px;
     max-height: 187px;
