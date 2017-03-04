@@ -63,13 +63,13 @@ router.get('/game_start', function(req, res, next) {
     // Deal 13 cards from this deck.
     var hand = [];
     for (i = 0; i < 13; i++) {
-        hand.push(deck[i]);
+        hand.push(deck.pop());
     }
 
     // TODO: choose random player.
     var startingPlayerID = 1;
     // Choose a player and deal the 14th card.
-    hand.push(deck[i++]);
+    hand.push(deck.pop());
 
     // Save the game to MongoDB.
     var userID = 1;//req.param.userid; // TODO - player system.
@@ -99,7 +99,37 @@ router.get('/game_start', function(req, res, next) {
 });
 
 /* Discard a card. */
-router.delete('/discard_card', function(req, res, next) {
+router.get('/card', function(req, res, next) {
+    var gameid = req.query.gameid;
+    var playerid = req.query.playerid;
+
+    // TODO - session security etc.
+
+    Game.findOne({_id: gameid}, function (err, doc) {
+        if (err) {
+            res.status(404).end();
+        }
+
+        // Grab a card from the deck.
+        var card = doc.deck.pop();
+        console.log(doc.deck.length);
+
+        doc.hands.id(playerid).cards.push(card);
+        doc.save(function (err) {
+            if (err) {
+                console.log(err);
+                res.status(404).end();
+            } else {
+                res.json({
+                    hand: doc.hands.id(playerid).cards,
+                });
+            }
+        });
+    });
+});
+
+/* Discard a card. */
+router.delete('/card', function(req, res, next) {
     var gameid = req.query.gameid;
     var playerid = req.query.playerid;
     var cardid = req.query.cardid;
