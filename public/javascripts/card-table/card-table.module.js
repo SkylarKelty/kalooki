@@ -1,6 +1,6 @@
 // Register `CardTable` component, along with its associated controller and template
 angular.module('kalookiApp').component('cardTable', {
-    templateUrl: 'card-table/card-table.template.html',
+    templateUrl: 'javascripts/card-table/card-table.template.html',
     controller: function CardTableController($http) {
         var self = this;
 
@@ -8,7 +8,7 @@ angular.module('kalookiApp').component('cardTable', {
 
         // Build my hand.
         self.hand = [];
-        $http.get('api/index.php').then(function(response) {
+        $http.get('http://localhost:3000/api/game_start').then(function(response) {
             self.hand = response.data;
         });
 

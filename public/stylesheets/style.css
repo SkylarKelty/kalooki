@@ -1,0 +1,49 @@
+body {
+    background-color: #00dd77;
+}
+
+.infotext {
+    text-align: center;
+    margin-top: -20px;
+}
+
+.cardslot {
+    border: 1px solid #CCC;
+    border-radius: 5px;
+}
+
+.section {
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+
+.cardhand {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+	list-style: none outside none;
+	margin-bottom: 0;
+	padding: 5px 20px;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    border-top: 1px solid #19FF95;
+    background: #00904E;
+}
+
+.cardhand .cardslot {
+    display: inline-flex;
+	padding: 5px;
+	border: 0;
+	font-size: 1.1em;
+	font-weight: bold;
+	text-align: center;
+	cursor: move;
+    min-width: 0;
+}
+
+.cardhand .cardslot img {
+    width: 100%;
+    max-width: 135px;
+    max-height: 187px;
+}

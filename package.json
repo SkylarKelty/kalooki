@@ -1,0 +1,24 @@
+{
+  "name": "kalooki-api",
+  "version": "1.0.0",
+  "description": "Kalooki online",
+  "main": "app.js",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "author": "Skylar Kelty",
+  "license": "GPL-2.0",
+  "repository": "https://github.com/SkylarKelty/kalooki.git",
+  "dependencies": {
+    "body-parser": "^1.16.0",
+    "cookie-parser": "^1.4.3",
+    "debug": "^2.6.0",
+    "ejs": "^2.5.5",
+    "express": "^4.15",
+    "morgan": "^1.7.0",
+    "serve-favicon": "^2.3.2",
+    "shuffle-array": "^1.0.1",
+    "mongoose": "^4.8.5"
+  }
+}
