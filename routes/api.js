@@ -10,10 +10,10 @@ var gameSchema = new Schema({
   id:  Number,
   owner: Number,
   players: [{ id: Number, name: String }],
-  deck: [{ pack: Number, src: String, suit: String, card: String }],
-  discard: [{ src: String, suit: String, card: String }],
-  table: [{ group: Number, src: String, suit: String, card: String }],
-  hands: [{ player: Number, cards: [{pack: Number, src: String, suit: String, card: String}] }],
+  deck: [{ _id: String, pack: Number, src: String, suit: String, card: String }],
+  discard: [{ _id: String, src: String, suit: String, card: String }],
+  table: [{ _id: String, group: Number, src: String, suit: String, card: String }],
+  hands: [{ _id: Number, cards: [{_id: String, pack: Number, src: String, suit: String, card: String}] }],
 });
 var Game = mongoose.model('Game', gameSchema);
 
@@ -34,6 +34,7 @@ router.get('/game_start', function(req, res, next) {
         for (i = 0; i < suits.length; i++) {
             for (j = 0; j < cards.length; j++) {
                 deck.push({
+                    '_id': p + '_' + i + '_' + j,
                     'pack': p,
                     'src': "/images/cards/" + suits[i] + "/" + cards[j] + ".png",
                     'suit': suits[i],
@@ -44,6 +45,7 @@ router.get('/game_start', function(req, res, next) {
 
         // Add the joker.
         deck.push({
+            '_id': p + '_joker',
             'pack': p,
             'src': "images/cards/joker" + p + ".png",
             'suit': 'joker',
@@ -70,31 +72,57 @@ router.get('/game_start', function(req, res, next) {
     hand.push(deck[i++]);
 
     // Save the game to MongoDB.
-    var userID = 1;//req.param('userid'); // TODO - player system.
-    var gameID = Math.floor((Math.random() * 1000000) + 1); // TODO: collision check.
+    var userID = 1;//req.param.userid; // TODO - player system.
     var game = new Game({
-        id:  gameID,
         owner: userID,
         players: [{ id: userID, name: "Sky" }], // TODO - player system.
         deck: deck,
         discard: [],
         table: [],
-        hands: [{ player: userID, cards: hand}]
+        hands: [{ _id: userID, cards: hand}]
     });
 
     game.save(function (err) {
         if (err) {
             console.log(err);
+            res.status(404).end();
         } else {
-            console.log('New game started: ' + gameID);
+            console.log('New game started: ' + game._id);
+
+            res.json({
+                gameid: game._id,
+                startingplayer: startingPlayerID,
+                hand: hand
+            })
         }
     });
+});
 
-    res.json({
-        gameid: gameID,
-        startingplayer: startingPlayerID,
-        hand: hand
-    })
+/* Discard a card. */
+router.delete('/discard_card', function(req, res, next) {
+    var gameid = req.query.gameid;
+    var playerid = req.query.playerid;
+    var cardid = req.query.cardid;
+
+    // TODO - session security etc.
+
+    Game.findOne({_id: gameid}, function (err, doc) {
+        if (err) {
+            res.status(404).end();
+        }
+
+        doc.hands.id(playerid).cards.id(cardid).remove();
+        doc.save(function (err) {
+            if (err) {
+                console.log(err);
+                res.status(404).end();
+            } else {
+                res.json({
+                    hand: doc.hands.id(playerid).cards,
+                });
+            }
+        });
+    });
 });
 
 module.exports = router;

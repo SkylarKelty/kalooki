@@ -32,6 +32,7 @@ body {
 }
 
 .cardslot {
+    position: relative;
 	padding: 5px;
 	border: 0;
 	font-size: 1.1em;
@@ -39,6 +40,13 @@ body {
 	text-align: center;
 	cursor: move;
     min-width: 0;
+}
+
+.carddiscard {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
 }
 
 .cardimg {

@@ -9,6 +9,7 @@
     <title><%= title %></title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/0890d21b74.css">
     <link rel="stylesheet" href="/stylesheets/style.css">
   </head>
 
@@ -28,7 +29,25 @@
       </div>
     </nav>
 
-    <card-table></card-table>
+    <div class="container-fluid">
+        <p class="infotext">{{infotext}}</p>
+
+        <div class="row justify-content-md-center">
+            <div class="deck col col-lg-1 cardslot">
+                <img ng-src="{{decksrc}}" alt="Deck" class="cardimg" />
+            </div>
+            <div class="discard col col-lg-1 cardslot">
+                <img ng-if="discardsrc != null" ng-src="{{discardsrc}}" alt="Discard Pile" class="cardimg" />
+            </div>
+        </div>
+
+        <ul ui-sortable="sortableOptions" ui-sortable-on-change="updateHandOrder" ng-model="hand" class="row justify-content-md-center cardhand">
+            <li ng-repeat="item in hand" class="cardslot col">
+                <i class="fa fa-times-circle carddiscard" aria-hidden="true" alt="Discard a card" ng-click="discardCard(item)" ng-if="discardmode == true"></i>
+                <img ng-src="{{item.src}}" alt="{{item.suit}} {{item.card}}" class="cardimg" />
+            </li>
+        </ul>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
@@ -38,6 +57,5 @@
     <script src="http://cdn.jsdelivr.net/g/angular.ui-sortable"></script>
 
     <script src="/javascripts/app.module.js"></script>
-    <script src="/javascripts/card-table/card-table.module.js"></script>
   </body>
 </html>
