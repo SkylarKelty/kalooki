@@ -1,59 +1,72 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="kalookiApp">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
 
-    <title><%= title %></title>
+        <title><%= title %></title>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/0890d21b74.css">
-    <link rel="stylesheet" href="/stylesheets/style.css">
-  </head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/0890d21b74.css">
+        <link rel="stylesheet" href="/stylesheets/style.css">
+    </head>
 
-  <body ng-controller="KalookiController">
-
-    <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse mb-4">
-      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <a class="navbar-brand" href="#">{{infotext}}</a>
-      <div class="collapse navbar-collapse" id="navbarCollapse">
-        <ul class="navbar-nav mr-auto">
-        </ul>
-        <form class="form-inline mt-2 mt-md-0">
-            <input class="form-control mr-sm-2" type="text" placeholder="Player Name" ng-model="playername">
-        </form>
-      </div>
-    </nav>
-
-    <div class="container-fluid">
-        <div class="row justify-content-md-center">
-            <div class="deck col col-lg-1 cardslot">
-                <img ng-src="{{decksrc}}" alt="Deck" class="cardimg" ng-click="pickDeck()" />
+    <body ng-controller="KalookiController">
+        <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse mb-4">
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand" href="#">{{infotext}}</a>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav mr-auto">
+                </ul>
+                <form class="form-inline mt-2 mt-md-0">
+                    <input class="form-control mr-sm-2" type="text" placeholder="Player Name" ng-model="playername">
+                </form>
             </div>
-            <div class="discard col col-lg-1 cardslot">
-                <img ng-if="discardsrc != null" ng-src="{{discardsrc}}" alt="Discard Pile" class="cardimg" />
+        </nav>
+
+        <div id="main-content" class="container-fluid">
+            <div class="row">
+                <div class="col start">
+                    <div class="row justify-content-md-center">
+                        <div class="deck col col-lg-1 cardslot">
+                            <img ng-src="{{decksrc}}" alt="Deck" class="cardimg" ng-click="pickDeck()" />
+                        </div>
+                        <div class="discard col col-lg-1 cardslot">
+                            <img ng-if="discardsrc != null" ng-src="{{discardsrc}}" alt="Discard Pile" class="cardimg" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col center">
+                    <ul ui-sortable="sortableOptions" ui-sortable-on-change="updateTable" ng-model="table" class="row justify-content-md-center cardtable">
+                        <li ng-repeat="item in table" class="cardslot col">
+                            <img ng-src="{{item.src}}" alt="{{item.suit}} {{item.card}}" class="cardimg" />
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col end">
+                    <ul ui-sortable="sortableOptions" ui-sortable-on-change="updateHand" ng-model="hand" class="row align-items-end justify-content-md-center cardhand">
+                        <li ng-repeat="item in hand" class="cardslot col">
+                            <i class="fa fa-times-circle carddiscard" aria-hidden="true" alt="Discard a card" ng-click="discardCard(item)" ng-if="gamemode == 'discard'"></i>
+                            <img ng-src="{{item.src}}" alt="{{item.suit}} {{item.card}}" class="cardimg" />
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
 
-        <ul ui-sortable="sortableOptions" ui-sortable-on-change="updateHandOrder" ng-model="hand" class="row justify-content-md-center cardhand">
-            <li ng-repeat="item in hand" class="cardslot col">
-                <i class="fa fa-times-circle carddiscard" aria-hidden="true" alt="Discard a card" ng-click="discardCard(item)" ng-if="gamemode == 'discard'"></i>
-                <img ng-src="{{item.src}}" alt="{{item.suit}} {{item.card}}" class="cardimg" />
-            </li>
-        </ul>
-    </div>
+        <script src="https://cdn.jsdelivr.net/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+        <script src="http://cdn.jsdelivr.net/g/angular.ui-sortable"></script>
 
-    <script src="https://cdn.jsdelivr.net/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-    <script src="http://cdn.jsdelivr.net/g/angular.ui-sortable"></script>
-
-    <script src="/javascripts/app.module.js"></script>
-  </body>
+        <script src="/javascripts/app.module.js"></script>
+    </body>
 </html>

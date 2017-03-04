@@ -10,6 +10,31 @@ body {
     color: #FFF;
 }
 
+#main-content {
+    height: 100%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    padding-top: 55px;
+}
+
+#main-content > .row {
+    flex-direction: column;
+    height: 100%;
+}
+
+#main-content > .row > .col {
+    flex-basis: auto;
+}
+
+#main-content > .row > .col.start,
+#main-content > .row > .col.end {
+    flex-grow: 0;
+}
+
 .bg-inverse {
     background-color: rgba(0, 0, 0, 0.3) !important;
     border-bottom: 1px solid rgba(0, 0, 0, 0.7);
@@ -30,18 +55,24 @@ body {
 	margin-bottom: 30px;
 }
 
-.cardhand {
+.cardsets {
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
+}
+
+.cardhand, .cardtable {
 	list-style: none outside none;
 	margin-bottom: 0;
 	padding: 5px 20px;
     flex-wrap: nowrap;
     justify-content: space-around;
-    background: rgba(255, 255, 255, 0.1);
     border-top: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.cardhand {
+    background: rgba(255, 255, 255, 0.1);
 }
 
 .deck img {

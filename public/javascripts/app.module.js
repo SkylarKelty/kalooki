@@ -9,6 +9,7 @@ kalooki.controller('KalookiController', function KalookiController($scope, $http
     // Local variables.
     $scope.gameid = null;
     $scope.hand = [];
+    $scope.table = [];
     $scope.decksrc = 'images/cards/back1.png'; // TODO - change depending on which deck is active.
     $scope.discardsrc = null;
     $scope.playerid = 1; // TODO - multiplayer support.
