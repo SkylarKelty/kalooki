@@ -62,17 +62,23 @@ body {
     right: 0;
 }
 
-.cardhand, .cardtable {
+.cardhand {
 	list-style: none outside none;
 	margin-bottom: 0;
 	padding: 5px 20px;
     flex-wrap: nowrap;
     justify-content: space-around;
     border-top: 1px solid rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.1);
 }
 
-.cardhand {
+.dropzone {
+    border-top: 1px solid rgba(255, 255, 255, 0.4);
     background: rgba(255, 255, 255, 0.1);
+}
+
+.cardtable {
+    border-top: 1px solid rgba(255, 255, 255, 0.4);
 }
 
 .deck img {

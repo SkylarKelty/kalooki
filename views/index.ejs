@@ -41,16 +41,20 @@
                     </div>
                 </div>
 
-                <div class="col center">
-                    <ul ui-sortable="sortableOptions" ui-sortable-on-change="updateTable" ng-model="table" class="row justify-content-md-center cardtable">
-                        <li ng-repeat="item in table" class="cardslot col">
-                            <img ng-src="{{item.src}}" alt="{{item.suit}} {{item.card}}" class="cardimg" />
-                        </li>
-                    </ul>
+                <div class="cardtable col center">
+                    <div ng-repeat="item in table" class="cardslot col">
+                        <img ng-src="{{item.src}}" alt="{{item.suit}} {{item.card}}" class="cardimg" />
+                    </div>
+                </div>
+
+                <div class="dropzone col end" ui-sortable="dropzone" ng-model="dropzone">
+                    <div ng-repeat="item in dropzone" class="cardslot col">
+                        <img ng-src="{{item.src}}" alt="{{item.suit}} {{item.card}}" class="cardimg" />
+                    </div>
                 </div>
 
                 <div class="col end">
-                    <ul ui-sortable="sortableOptions" ui-sortable-on-change="updateHand" ng-model="hand" class="row align-items-end justify-content-md-center cardhand">
+                    <ul ui-sortable="sortableOptions" ng-model="hand" class="row align-items-end justify-content-md-center cardhand">
                         <li ng-repeat="item in hand" class="cardslot col">
                             <i class="fa fa-times-circle carddiscard" aria-hidden="true" alt="Discard a card" ng-click="discardCard(item)" ng-if="gamemode == 'discard'"></i>
                             <img ng-src="{{item.src}}" alt="{{item.suit}} {{item.card}}" class="cardimg" />

@@ -10,6 +10,7 @@ kalooki.controller('KalookiController', function KalookiController($scope, $http
     $scope.gameid = null;
     $scope.hand = [];
     $scope.table = [];
+    $scope.dropzone = [];
     $scope.decksrc = 'images/cards/back1.png'; // TODO - change depending on which deck is active.
     $scope.discardsrc = null;
     $scope.playerid = 1; // TODO - multiplayer support.
@@ -71,10 +72,19 @@ kalooki.controller('KalookiController', function KalookiController($scope, $http
 
     // Sorting hand logic.
     $scope.sortableOptions = {
-        'ui-floating': true,
-        axis: 'x',
-        update: function(e, ui) {
-            // TODO - save order.
+        connectWith: '.dropzone',
+        start: function (e, ui) {
+            $('.dropzone').css('min-height', $('.cardhand').height());
+            $('.dropzone').sortable('refresh');
+        },
+        update: function (e, ui) {
+        },
+        stop: function(e, ui) {
+            if (ui.item.sortable.droptarget[0].classList[0] == "cardtable") {
+                console.log(ui.item.sortable.droptarget[0].classList[0]);
+            }
+            //$('.dropzone').css('min-height',0);
+            // TODO - save state.
         }
     };
 });
